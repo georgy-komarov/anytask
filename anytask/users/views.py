@@ -317,9 +317,7 @@ def ya_oauth_request(request, type_of_oauth):
         OAUTH = settings.PASSPORT_OAUTH_ID
         PASSWORD = settings.PASSPORT_OAUTH_PASSWORD
 
-    ya_oauth = yandex_oauth.OAuthYandex(OAUTH, PASSWORD)
-
-    return redirect(ya_oauth.get_code())
+    return redirect('https://oauth.yandex.ru/authorize?response_type=code&force_confirm=1&client_id=' + OAUTH)
 
 
 def ya_oauth_contest(user, ya_response, ya_contest_response):
