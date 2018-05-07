@@ -335,7 +335,10 @@ class Issue(models.Model):
                                 else:
                                     value['comment'] += u"<p>{0}('{1}')</p>".format(_(u'oshibka_otpravki_v_kontest'),
                                                                                     contest_submission.send_error)
-                                    self.followers.add(User.objects.get(username='anytask.monitoring'))
+                                    try:
+                                        self.followers.add(User.objects.get(username='anytask.monitoring'))
+                                    except Exception:
+                                        pass
                                 break
 
                     if self.task.rb_integrated \

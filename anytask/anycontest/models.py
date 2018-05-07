@@ -74,12 +74,13 @@ class ContestSubmission(models.Model):
                 reg_req = requests.get(
                     settings.CONTEST_API_URL + 'status?contestId=' + str(contest_id),
                     headers={'Authorization': 'OAuth ' + oauth})
-                if 'error' in reg_req.json():
-                    self.send_error = reg_req.json()["error"]["message"]
+                reg_json = reg_req.json()
+                if 'error' in reg_json:
+                    self.send_error = reg_json["error"]["message"]
                     self.save()
                     return False
 
-                if not reg_req.json()['result']['isRegistered']:
+                if not reg_json['result']['isRegistered']:
                     got_info, response_text = user_register_to_contest(contest_id, student_profile.ya_contest_uid)
                     if not got_info:
                         self.send_error = response_text
@@ -90,8 +91,9 @@ class ContestSubmission(models.Model):
 
             problem_req = requests.get(settings.CONTEST_API_URL + 'problems?contestId=' + str(contest_id),
                                        headers={'Authorization': 'OAuth ' + settings.CONTEST_OAUTH})
+            problem_json = problem_req.json()
             problem_id = None
-            for problem in problem_req.json()['result']['problems']:
+            for problem in problem_json['result']['problems']:
                 if problem['title'] == issue.task.problem_id:
                     problem_id = problem['id']
                     break
@@ -111,16 +113,17 @@ class ContestSubmission(models.Model):
                                                      'problemId': problem_id},
                                                files=files,
                                                headers={'Authorization': 'OAuth ' + oauth})
-                    if 'error' not in submit_req.json():
+                    submit_json = submit_req.json()
+                    if 'error' not in submit_json:
                         break
                     time.sleep(0.5)
 
-            if 'error' in submit_req.json():
-                self.send_error = submit_req.json()["error"]["message"]
+            if 'error' in submit_json:
+                self.send_error = submit_json["error"]["message"]
                 self.save()
                 return False
 
-            run_id = submit_req.json()['result']['value']
+            run_id = submit_json['result']['value']
             sent = True
             logger.info("Contest submission with run_id '%s' sent successfully.", run_id)
             issue.set_byname(name='run_id', value=run_id)
@@ -128,7 +131,7 @@ class ContestSubmission(models.Model):
             self.save()
         except Exception as e:
             logger.exception("Exception while request to Contest: '%s' : '%s', '%s' : '%s', Exception: '%s'",
-                             problem_req.url, problem_req.json(), submit_req.url, submit_req.json(), e)
+                             problem_req.url, problem_json, submit_req.url, submit_json, e)
             sent = False
             message = "Unexpected error"
 
