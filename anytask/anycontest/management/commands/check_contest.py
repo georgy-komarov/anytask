@@ -14,7 +14,6 @@ from anycontest.models import ContestSubmission
 from anyrb.common import AnyRB
 from users.models import UserProfile
 
-
 logger = logging.getLogger('django.request')
 
 
@@ -75,8 +74,10 @@ class Command(BaseCommand):
                             if issue.task.course.take_mark_from_contest:
                                 contest_submission.get_contest_mark()
                                 contest_marks_len += 1
-
-                        comment_verdict(issue, contest_submission.verdict == 'ok', comment)
+                        issue.save()
+                        comment_verdict(issue,
+                                        contest_submission.verdict == 'ok' or task.course.issue_status_system.has_partial_solution(),
+                                        comment)
                     translation.deactivate()
                 except Exception as e:
                     logger.exception(e)
@@ -85,5 +86,8 @@ class Command(BaseCommand):
             #     set_contest_marks(contest_id, students_info)
 
             # logging to cron log
-            print "Command check_contest check {0} submissions ({1} - with marks) took {2} seconds" \
-                .format(len(contest_submissions), contest_marks_len, time.time() - start_time)
+            if contest_marks_len:
+                print "Command check_contest check {0} submissions ({1} - with marks) took {2} seconds" \
+                    .format(len(contest_submissions), contest_marks_len, time.time() - start_time)
+            else:
+                print 'Waiting...'

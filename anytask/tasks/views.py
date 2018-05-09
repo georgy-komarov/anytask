@@ -387,9 +387,10 @@ def contest_task_import(request):
 
     problem_req = requests.get(PROBLEMS_API.format(lang='ru', cont_id=str(contest_id)),
                                headers=HEADERS)
+    problem_json = problem_req.json()
     problems = []
-    if 'result' in problem_req.json():
-        problems = problem_req.json()['result']['problems']
+    if 'result' in problem_json:
+        problems = problem_json['result']['problems']
 
     problems_with_score = {problem['id']: problem.get('score') for problem in problems}
 

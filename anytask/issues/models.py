@@ -86,7 +86,9 @@ class Issue(models.Model):
     status_field = models.ForeignKey(IssueStatus, db_index=True, null=False, blank=False, default=1)
 
     def is_status_accepted(self):
-        return self.status_field.tag in [IssueStatus.STATUS_ACCEPTED, IssueStatus.STATUS_ACCEPTED_AFTER_DEADLINE]
+        return self.status_field.tag in [IssueStatus.STATUS_ACCEPTED, IssueStatus.STATUS_ACCEPTED_AFTER_DEADLINE,
+                                         IssueStatus.STATUS_ACCEPTED_PARTIAL_SOLUTION,
+                                         IssueStatus.STATUS_ACCEPTED_PARTIAL_SOLUTION_AFTER_DEADLINE]
 
     def is_status_only_accepted(self):
         return self.status_field.tag == IssueStatus.STATUS_ACCEPTED
@@ -595,9 +597,9 @@ class IssueFilter(django_filters.FilterSet):
         students_choices = [(teacher.id, teacher.get_full_name()) for teacher in course.get_students()]
         self.filters['students'].field.choices = tuple(students_choices)
 
-        tasks_all = Task.objects\
-            .filter(course=course)\
-            .exclude(type=Task.TYPE_MATERIAL)\
+        tasks_all = Task.objects \
+            .filter(course=course) \
+            .exclude(type=Task.TYPE_MATERIAL) \
             .distinct()
 
         seminars = tasks_all.filter(type=Task.TYPE_SEMINAR)

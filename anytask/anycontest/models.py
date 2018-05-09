@@ -147,7 +147,12 @@ class ContestSubmission(models.Model):
         issue = self.issue
 
         try:
-            oauth = settings.CONTEST_OAUTH
+            student_profile = issue.student.get_profile()
+            course = issue.task.course
+            if student_profile.ya_contest_oauth and course.send_to_contest_from_users:
+                oauth = student_profile.ya_contest_oauth
+            else:
+                oauth = settings.CONTEST_OAUTH
             contest_id = issue.task.contest_id
             results_req = requests.get(
                 settings.CONTEST_V1_API_URL + '/contests/' + str(contest_id) + '/submissions/' + str(run_id) + '/full',

@@ -312,12 +312,12 @@ def set_user_statuses(request, username=None):
 def ya_oauth_request(request, type_of_oauth):
     if type_of_oauth == 'contest':
         OAUTH = settings.CONTEST_OAUTH_ID
-        PASSWORD = settings.CONTEST_OAUTH_PASSWORD
     elif type_of_oauth == 'passport':
         OAUTH = settings.PASSPORT_OAUTH_ID
-        PASSWORD = settings.PASSPORT_OAUTH_PASSWORD
 
-    return redirect('https://oauth.yandex.ru/authorize?response_type=code&force_confirm=1&client_id=' + OAUTH)
+    return redirect(
+        'https://oauth.yandex.ru/authorize?redirect_uri={}/{}&response_type=code&force_confirm=1&client_id={}'.format(
+            settings.CALLBACK_URI.rstrip('/'), type_of_oauth, OAUTH))
 
 
 def ya_oauth_contest(user, ya_response, ya_contest_response):
@@ -540,9 +540,9 @@ def user_courses(request, username=None, year=None):
 
     for course in courses:
 
-        tasks = Task.objects\
+        tasks = Task.objects \
             .filter(course=course, groups__in=groups, is_hidden=False) \
-            .exclude(type=Task.TYPE_MATERIAL)\
+            .exclude(type=Task.TYPE_MATERIAL) \
             .distinct()
         issues = Issue.objects.filter(student=user_to_show, task__in=tasks)
 
@@ -552,14 +552,14 @@ def user_courses(request, username=None, year=None):
             mark = None
 
         student_summ_score = issues \
-            .filter(task__parent_task__isnull=True) \
-            .filter(
-                Q(task__type=Task.TYPE_SEMINAR) |
-                Q(task__score_after_deadline=True) |
-                ~Q(task__score_after_deadline=False, status_field__tag=IssueStatus.STATUS_ACCEPTED_AFTER_DEADLINE)
-            ) \
-            .distinct() \
-            .aggregate(Sum('mark'))['mark__sum'] or 0
+                                 .filter(task__parent_task__isnull=True) \
+                                 .filter(
+            Q(task__type=Task.TYPE_SEMINAR) |
+            Q(task__score_after_deadline=True) |
+            ~Q(task__score_after_deadline=False, status_field__tag=IssueStatus.STATUS_ACCEPTED_AFTER_DEADLINE)
+        ) \
+                                 .distinct() \
+                                 .aggregate(Sum('mark'))['mark__sum'] or 0
 
         new_course_statistics = dict()
         new_course_statistics['name'] = course.name
