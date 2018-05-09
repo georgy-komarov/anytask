@@ -155,7 +155,13 @@ class ContestSubmission(models.Model):
             )
 
             results_req_json = results_req.json()
-            issue.set_byname('mark', float(results_req_json['finalScore']))
+            try:
+                new_mark = float(results_req_json['finalScore'])
+                previous_mark = float(issue.get_byname('mark'))
+                if new_mark >= previous_mark:
+                    issue.set_byname('mark', new_mark)
+            except ValueError:
+                issue.set_status_rework()
 
             logger.info("Contest submission mark with run_id '%s' got successfully.", run_id)
             got_mark = True
@@ -224,7 +230,9 @@ class ContestSubmission(models.Model):
                           + results_req_json['result']['submission']['verdict'] + '</p><pre>' \
                           + escape(results_req_json['result']['compileLog'][18:]) + '</pre>'
                 if results_req_json['result']['tests']:
-                    test = results_req_json['result']['tests'][-1]
+                    for test in results_req_json['result']['tests']:
+                        if test['verdict'] == contest_verdict:
+                            break
                     self.used_time = test['usedTime']
                     self.used_memory = test['usedMemory']
                     test_resourses = u'<p><u>{0}</u> '.format(_(u'resursy')) + str(test['usedTime']) \
@@ -268,6 +276,7 @@ class ContestSubmission(models.Model):
 
             logger.info("Contest submission verdict with run_id '%s' got successfully.", run_id)
             got_verdict = True
+
         except ContestSubmissionWaiting:
             logger.warning("Run_id %s is waiting for %s", run_id, timezone.now() - self.create_time)
             got_verdict = False

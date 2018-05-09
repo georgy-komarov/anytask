@@ -259,6 +259,12 @@ class Issue(models.Model):
     def set_status_accepted_after_deadline(self, author=None):
         self.set_status_by_tag(IssueStatus.STATUS_ACCEPTED_AFTER_DEADLINE, author)
 
+    def set_status_partial_solution(self, author=None):
+        self.set_status_by_tag(IssueStatus.STATUS_ACCEPTED_PARTIAL_SOLUTION, author)
+
+    def set_status_partial_solution_after_deadline(self, author=None):
+        self.set_status_by_tag(IssueStatus.STATUS_ACCEPTED_PARTIAL_SOLUTION_AFTER_DEADLINE, author)
+
     def set_status_need_info(self, author=None):
         self.set_status_by_tag(IssueStatus.STATUS_NEED_INFO, author)
 
@@ -335,10 +341,8 @@ class Issue(models.Model):
                                 else:
                                     value['comment'] += u"<p>{0}('{1}')</p>".format(_(u'oshibka_otpravki_v_kontest'),
                                                                                     contest_submission.send_error)
-                                    try:
-                                        self.followers.add(User.objects.get(username='anytask.monitoring'))
-                                    except Exception:
-                                        pass
+                                    # self.followers.add(User.objects.get(username='anytask.monitoring'))
+
                                 break
 
                     if self.task.rb_integrated \
@@ -353,7 +357,7 @@ class Issue(models.Model):
                                         format(review_request_id, settings.RB_API_URL)
                                 else:
                                     value['comment'] += u'<p>{0}</p>'.format(_(u'oshibka_otpravki_v_rb'))
-                                    self.followers.add(User.objects.get(username='anytask.monitoring'))
+                                    # self.followers.add(User.objects.get(username='anytask.monitoring'))
                                 break
 
                 if not value['files'] and not value['comment']:
