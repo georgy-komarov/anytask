@@ -3,6 +3,8 @@
 import logging
 import time
 
+from datetime import datetime
+
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.utils import translation, timezone
@@ -87,7 +89,8 @@ class Command(BaseCommand):
 
             # logging to cron log
             if contest_marks_len:
-                print "Command check_contest check {0} submissions ({1} - with marks) took {2} seconds" \
-                    .format(len(contest_submissions), contest_marks_len, time.time() - start_time)
-            else:
-                print 'Waiting...'
+                now = time.time()
+                print "[{}] Command check_contest check {} submissions ({} - with marks) took {} seconds" \
+                    .format(datetime.fromtimestamp(now).strftime('%Y-%m-%d %H:%M:%S'), len(contest_submissions),
+                            contest_marks_len, now - start_time)
+
