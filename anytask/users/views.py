@@ -315,7 +315,7 @@ def ya_oauth_request(request, type_of_oauth):
     elif type_of_oauth == 'passport':
         OAUTH = settings.PASSPORT_OAUTH_ID
 
-    redirect_uri = 'http://{}/{}'.format(request.META['HTTP_HOST'], type_of_oauth)
+    redirect_uri = 'http://{}/user/ya_oauth_response/{}'.format(request.META['HTTP_HOST'], type_of_oauth)
     return redirect(
         'https://oauth.yandex.ru/authorize?redirect_uri={}&response_type=code&force_confirm=1&client_id={}'.format(
             redirect_uri, OAUTH))
