@@ -1,5 +1,5 @@
 [Unit]
-Description=Anytask Django Server
+Description=Anycontest check daemon
 After=syslog.target
 After=network.target
 

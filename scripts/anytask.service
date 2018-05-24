@@ -1,5 +1,5 @@
 [Unit]
-Description=Anytask Django Server
+Description=Anytask Django Development Server
 After=syslog.target
 After=network.target
 

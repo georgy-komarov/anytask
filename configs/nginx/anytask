@@ -1,0 +1,29 @@
+server {
+    listen 8080;
+    server_name domain.com mydoamin.ru;
+    
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 8443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/anytask-klg.tk/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/anytask-klg.tk/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+    add_header Strict-Transport-Security "max-age=31536000" always; # enable HSTS
+
+
+    server_name domain.com mydoamin.ru;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/user/anytask/anytask;
+    }
+
+    location / {
+        include         uwsgi_params;
+        uwsgi_pass      unix:/run/uwsgi/anytask.sock;
+    }
+}
