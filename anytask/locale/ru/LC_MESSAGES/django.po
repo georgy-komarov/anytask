@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-06 23:22+0300\n"
+"POT-Creation-Date: 2018-05-24 01:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: admission/views.py:171 courses/templates/courses/course_forbidden.html:30
-#: issues/templates/file_uploader.html:191
+#: issues/templates/file_uploader.html:200
 msgid "oshibka"
 msgstr "Ошибка"
 
@@ -40,46 +40,47 @@ msgstr "Спасибо"
 msgid "informatsiya_o_vas_byla_udalena"
 msgstr "Информация о вас была удалена."
 
-#: anycontest/models.py:209 anycontest/models.py:215 anycontest/models.py:220
+#: anycontest/models.py:223 anycontest/models.py:229 anycontest/models.py:234
 #: anycontest/tests.py:250 anycontest/tests.py:267 anycontest/tests.py:288
 msgid "verdikt_jakontest"
 msgstr "Вердикт Я.Контест"
 
-#: anycontest/models.py:227
+#: anycontest/models.py:243
 msgid "resursy"
 msgstr "Ресурсы"
 
-#: anycontest/models.py:230
+#: anycontest/models.py:246
 msgid "vvod"
 msgstr "Ввод"
 
-#: anycontest/models.py:236
+#: anycontest/models.py:252
 msgid "vyvod_programmy"
 msgstr "Вывод программы"
 
-#: anycontest/models.py:242
+#: anycontest/models.py:258
 msgid "pravilnyj_otvet"
 msgstr "Правильный ответ"
 
-#: anycontest/models.py:256
+#: anycontest/models.py:272
 msgid "soobshenie_chekera"
 msgstr "Сообщение чекера"
 
-#: anycontest/models.py:262
+#: anycontest/models.py:278
 msgid "test"
 msgstr "Тест"
 
-#: anycontest/management/commands/check_contest.py:49 issues/models.py:352
+#: anycontest/management/commands/check_contest.py:52 issues/models.py:361
 #: issues/views.py:118
 msgid "oshibka_otpravki_v_rb"
 msgstr "Ошибка отправки в Review Board"
 
-#: anycontest/management/commands/check_contest.py:57
+#: anycontest/management/commands/check_contest.py:60
+#: anycontest/management/commands/check_contest.py:71
 msgid "bally_ne_uchityvautsia"
 msgstr "Баллы за задачу, зачтенную после дедлайна, не учитываются"
 
 #: anyrb/common.py:87 courses/templates/courses/queue.html:77
-#: issues/models.py:571 issues/views.py:50
+#: issues/models.py:580 issues/views.py:50
 #: issues/management/commands/send_notifications.py:94
 #: users/templates/my_tasks.html:139
 msgid "zadacha"
@@ -149,7 +150,7 @@ msgstr "отказался от задачи"
 msgid "ochistit"
 msgstr "Очистить"
 
-#: courses/views.py:86 staff/views.py:89 users/views.py:496
+#: courses/views.py:86 staff/views.py:89 users/views.py:495
 msgid "primenit"
 msgstr "Применить"
 
@@ -161,7 +162,7 @@ msgstr "Такого соревнования не существует"
 msgid "oshibka_kontesta"
 msgstr "Ошибка Я.Контеста:"
 
-#: courses/views.py:850 tasks/views.py:341 tasks/views.py:426
+#: courses/views.py:850 tasks/views.py:341 tasks/views.py:427
 msgid "net_prav_na_kontest"
 msgstr "У Anytask нет прав на данное соревнование"
 
@@ -326,7 +327,6 @@ msgstr "Импорт соревнования из Я.Контеста"
 
 #: courses/templates/courses/course.html:205
 #: courses/templates/courses/course.html:279
-#: courses/templates/courses/course.html:321
 #: courses/templates/courses/course.html:380
 #: courses/templates/courses/course.html:429
 #: courses/templates/courses/course.html:512
@@ -579,7 +579,7 @@ msgstr "Обновлена"
 msgid "ocenka"
 msgstr "Оценка"
 
-#: courses/templates/courses/queue.html:80 issues/models.py:565
+#: courses/templates/courses/queue.html:80 issues/models.py:574
 #: issues/views.py:52
 msgid "proverjaushij"
 msgstr "Проверяющий"
@@ -890,7 +890,7 @@ msgid "dejstvitelen_do"
 msgstr "Действителен до"
 
 #: issues/admin.py:25 issues/model_issue_student_filter.py:22
-#: issues/models.py:563 issues/views.py:54
+#: issues/models.py:572 issues/views.py:54
 #: issues/templates/issues/info.html:113 staff/templates/staff.html:90
 #: users/admin.py:27 users/templates/my_tasks.html:143
 msgid "status"
@@ -908,7 +908,7 @@ msgstr "Тип курса"
 msgid "god_kursa"
 msgstr "Учебный год"
 
-#: issues/model_issue_student_filter.py:23 issues/models.py:564
+#: issues/model_issue_student_filter.py:23 issues/models.py:573
 msgid "data_poslednego_izmenenija"
 msgstr "Дата последнего изменения"
 
@@ -938,51 +938,51 @@ msgstr "Зачтено"
 msgid "na_avtomaticheskoj_proverke"
 msgstr "На автоматической проверке"
 
-#: issues/models.py:332 issues/views.py:100
+#: issues/models.py:340 issues/views.py:100
 msgid "otpravleno_v_kontest"
 msgstr "Отправлено на проверку в Я.Контест."
 
-#: issues/models.py:336 issues/views.py:105
+#: issues/models.py:344 issues/views.py:105
 msgid "oshibka_otpravki_v_kontest"
 msgstr "Ошибка отправки в Я.Контест."
 
-#: issues/models.py:503
+#: issues/models.py:512
 msgid "zadachu_proveriaet"
 msgstr "Теперь задачу проверяет"
 
-#: issues/models.py:504
+#: issues/models.py:513
 msgid "status_izmenen"
 msgstr "Статус изменен:"
 
-#: issues/models.py:505
+#: issues/models.py:514
 msgid "ocenka_izmenena"
 msgstr "Оценка изменена на"
 
-#: issues/models.py:506
+#: issues/models.py:515
 msgid "zagruzhen_faij"
 msgstr "Загружен файл:"
 
-#: issues/models.py:512 issues/models.py:515
+#: issues/models.py:521 issues/models.py:524
 msgid "nabludaiut"
 msgstr "За задачей наблюдают:"
 
-#: issues/models.py:512
+#: issues/models.py:521
 msgid "nabludaet_nikto"
 msgstr "За задачей никто не наблюдает."
 
-#: issues/models.py:517
+#: issues/models.py:526
 msgid "ne_nabludaiut"
 msgstr "Удалены из наблюдателей:"
 
-#: issues/models.py:566 issues/views.py:53
+#: issues/models.py:575 issues/views.py:53
 msgid "nabludateli"
 msgstr "Наблюдатели"
 
-#: issues/models.py:567
+#: issues/models.py:576
 msgid "studenty"
 msgstr "Студенты"
 
-#: issues/models.py:569
+#: issues/models.py:578
 msgid "uroki"
 msgstr "Уроки"
 
@@ -1042,31 +1042,47 @@ msgstr "С уважением"
 msgid "komanda_anytask"
 msgstr "команда Anytask"
 
-#: issues/templates/file_uploader.html:104
+#: issues/templates/file_uploader.html:107
 msgid "otpravljat_odin_fajl"
 msgstr "Имя файла было изменено."
 
-#: issues/templates/file_uploader.html:113
+#: issues/templates/file_uploader.html:116
 msgid "vyberite_fajl"
 msgstr "Выберите файл"
 
-#: issues/templates/file_uploader.html:113
+#: issues/templates/file_uploader.html:116
 msgid "vyberite_fajly"
 msgstr "Выберите файлы"
 
-#: issues/templates/file_uploader.html:133
+#: issues/templates/file_uploader.html:136
 msgid "ili_peretashite_suda"
 msgstr "или перетащите сюда"
 
-#: issues/templates/file_uploader.html:141
+#: issues/templates/file_uploader.html:144
 msgid "zadat_vopros"
 msgstr "Задать вопрос"
 
-#: issues/templates/file_uploader.html:145 mail/templates/mail.html:158
+#: issues/templates/file_uploader.html:148 mail/templates/mail.html:158
 msgid "otpravit"
 msgstr "Отправить"
 
-#: issues/templates/file_uploader.html:234
+#: issues/templates/file_uploader.html:187
+msgid "prevysheno_kolvo_fajlov"
+msgstr "Превышено кол-во файлов"
+
+#: issues/templates/file_uploader.html:188
+msgid "nedopustimyj_tip_fajla"
+msgstr "Недопустимый тип файла"
+
+#: issues/templates/file_uploader.html:189
+msgid "fajl_slishkom_bolshoj"
+msgstr "Размер файла превышает допустимый лимит"
+
+#: issues/templates/file_uploader.html:190
+msgid "fajl_slishkom_mal"
+msgstr "Файл слишком мал"
+
+#: issues/templates/file_uploader.html:243
 msgid "vyberite_kompiljator"
 msgstr "Выберите компилятор"
 
@@ -1978,7 +1994,7 @@ msgstr "Есть новые сообщения"
 msgid "net_novyh_soobshenij"
 msgstr "Новых сообщений нет."
 
-#: templates/base.html:705 users/views.py:427 users/templates/my_tasks.html:96
+#: templates/base.html:705 users/views.py:426 users/templates/my_tasks.html:96
 #: users/templates/status_history.html:18 users/templates/user_courses.html:28
 #: users/templates/user_profile.html:19 users/templates/user_settings.html:16
 msgid "profil"
@@ -2183,24 +2199,24 @@ msgstr "Филиал"
 msgid "status_postupleniya"
 msgstr "Статус поступления"
 
-#: users/views.py:427
+#: users/views.py:426
 msgid "uzhe_privjazan"
 msgstr "уже привязан к аккаунту другого пользователя на Anytask."
 
-#: users/views.py:430 users/views.py:444 users/templates/user_profile.html:96
+#: users/views.py:429 users/views.py:443 users/templates/user_profile.html:96
 #: users/templates/user_profile.html:110
 msgid "privjazat_profil_kontesta"
 msgstr "Привязать профиль Яндекс.Контеста"
 
-#: users/views.py:432
+#: users/views.py:431
 msgid "privjazat_profil_ja"
 msgstr "Привязать профиль Яндекса"
 
-#: users/views.py:445
+#: users/views.py:444
 msgid "pereprivjazat_tolko_svoj_profil"
 msgstr "Перепривязать можно только профиль, который сейчас привязан"
 
-#: users/views.py:617
+#: users/views.py:616
 msgid "invajt_drugogo_kursa"
 msgstr "Инвайт относится к другому курсу."
 
@@ -2329,7 +2345,7 @@ msgstr "Ввести инвайт"
 msgid "privjazka_akkauntov"
 msgstr "Привязка аккаунтов"
 
-#: users/templates/user_profile.html:162 users/templates/user_settings.html:73
+#: users/templates/user_profile.html:162
 msgid "jandeks"
 msgstr "Яндекс"
 
