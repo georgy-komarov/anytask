@@ -285,7 +285,11 @@
                                                                 {% endif %}
                                                             </div>
                                                             <div style="width: 20%">
-                                                                {% if task.task.type == task.task.TYPE_SEMINAR %}
+                                                                {% if task.task.type == task.task.TYPE_FULL and user_is_teacher and user_is_student %}
+                                                                    <a style="width: 100%"
+                                                                       class="btn btn-sm btn-primary pull-xs-right"
+                                                                       href="/issue/get_or_create/{{ task.task.id }}/{{ user.id }}">{% trans "sdat" %}</a>
+                                                                {% elif task.task.type == task.task.TYPE_SEMINAR %}
                                                                     <a style="width: 100%"
                                                                        class="btn btn-sm btn-primary pull-xs-right"
                                                                        href="{% if task.task.children.count != 0 %}
@@ -396,7 +400,11 @@
                                                             {% endif %}
                                                         </div>
                                                         <div style="width: 20%">
-                                                            {% if task.task.type == task.task.TYPE_SEMINAR %}
+                                                            {% if task.task.type == task.task.TYPE_FULL and user_is_teacher and user_is_student %}
+                                                                <a style="width: 100%"
+                                                                   class="btn btn-sm btn-primary pull-xs-right"
+                                                                   href="/issue/get_or_create/{{ task.task.id }}/{{ user.id }}">{% trans "sdat" %}</a>
+                                                            {% elif task.task.type == task.task.TYPE_SEMINAR %}
                                                                 <a style="width: 100%"
                                                                    class="btn btn-sm btn-primary pull-xs-right"
                                                                    href="{% if task.task.children.count != 0 %}
