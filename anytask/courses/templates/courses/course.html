@@ -264,8 +264,11 @@
                                                 {% if not task.task.parent_task %}
                                                     {% if task.task.type != task.task.TYPE_MATERIAL %}
                                                         <div class="tasks-list">
-                                                            <div style="width: 35%;">
-                                                                {% get_text_from_json task.task 'get_title' LANGUAGE_CODE %}
+                                                            <div style="width: 40%;">
+                                                                <a data-toggle="collapse" aria-expanded="false"
+                                                                    aria-controls="collapse_{{ task.task.id }}"
+                                                                    href="#collapse_{{ task.task.id }}">
+                                                                    {% get_text_from_json task.task 'get_title' LANGUAGE_CODE %}</a>
                                                             </div>
                                                             <div style="width: 10%;">
                                                                 <a class="btn btn-secondary btn-sm btn-square"
@@ -291,6 +294,13 @@
                                                                 {% endif %}
                                                             </div>
                                                         </div>
+                                                        <div id="collapse_{{ task.task.id }}" class="collapse">
+                                                            <div style="width: 100%" style="border-top: 0;">
+                                                                <p class="card-text">
+                                                                    {{ task.task|get_description:LANGUAGE_CODE|safe }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
                                                     {% endif %}
                                                 {% endif %}
                                             {% endfor %}
@@ -305,19 +315,19 @@
                                         {% if not task.is_hidden and task.type != task.TYPE_MATERIAL %}
                                             <div class="tasks-list">
                                                 <div style="width: 40%;">
-                                                        <a data-toggle="collapse" aria-expanded="false"
-                                                           aria-controls="collapse_{{ task.id }}"
-                                                           href="#collapse_{{ task.id }}">
-                                                            {% get_text_from_json task 'get_title' LANGUAGE_CODE %}</a>
-                                                    </div>
-                                                    <div style="width: 5%">
-                                                        {{ task|get_score:user }}
-                                                    </div>
-                                                    <div style="text-align: center; width: 40%">
-                                                        <span class="label" style="width: 60%;
+                                                    <a data-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="collapse_{{ task.id }}"
+                                                       href="#collapse_{{ task.id }}">
+                                                        {% get_text_from_json task 'get_title' LANGUAGE_CODE %}</a>
+                                                </div>
+                                                <div style="width: 5%">
+                                                    {{ task|get_score:user }}
+                                                </div>
+                                                <div style="text-align: center; width: 40%">
+                                                    <span class="label" style="width: 60%;
                                                                                        background-color:{{ task|get_status_color:user }}"> {{ task|get_status_name:user }}
-                                                        </span>
-                                                    </div>
+                                                    </span>
+                                                </div>
 {#                                                <div style="width: 20%">#}
 {#                                                    {% if task.deadline_time %}{% trans "sdat_do" %}#}
 {#                                                        {% localtime on %}{{ task.deadline_time|date:"H:i d-m-Y" }}{% endlocaltime %}#}
@@ -365,8 +375,11 @@
                                             {% for task in task_item.list %}
                                                 {% if task.task.type != task.task.TYPE_MATERIAL %}
                                                     <div class="tasks-list">
-                                                        <div style="width: 35%;">
-                                                            {% get_text_from_json task.task 'get_title' LANGUAGE_CODE %}
+                                                        <div style="width: 40%;">
+                                                        <a data-toggle="collapse" aria-expanded="false"
+                                                           aria-controls="collapse_{{ task.task.id }}"
+                                                           href="#collapse_{{ task.task.id }}">
+                                                            {% get_text_from_json task.task 'get_title' LANGUAGE_CODE %}</a>
                                                         </div>
                                                         <div style="width: 10%;">
                                                             <a class="btn btn-secondary btn-sm btn-square"
@@ -390,6 +403,13 @@
                                                             {{ course.id }}/seminar/{{ task.task.id }}{% endif %}">
                                                                     {% trans "perejti" %}</a>
                                                             {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div id="collapse_{{ task.task.id }}" class="collapse">
+                                                        <div style="width: 100%" style="border-top: 0;">
+                                                            <p class="card-text">
+                                                                {{ task.task|get_description:LANGUAGE_CODE|safe }}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 {% endif %}
