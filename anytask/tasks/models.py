@@ -230,6 +230,10 @@ class Task(models.Model):
     def get_url_in_course(self):
         return reverse('courses.views.seminar_page', kwargs={'course_id': self.course_id, 'task_id': self.id})
 
+    @property
+    def score_max_seminar(self):
+        return sum(task.score_max for task in self.get_subtasks())
+
 
 class TaskLog(models.Model):
     title = models.CharField(max_length=191, db_index=True, null=True, blank=True)
