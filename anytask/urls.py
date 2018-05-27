@@ -1,7 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
-from django.views.generic.base import TemplateView, RedirectView
-from django.contrib.sites.models import Site
+from django.views.generic.base import TemplateView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -27,15 +26,15 @@ urlpatterns = patterns(
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     url(r'^about$', TemplateView.as_view(template_name='about.html')),
-    url(r'^$', RedirectView.as_view(url='{}/school/anytask'.format(Site.objects.get_current().domain), permanent=True)),
+    url(r'^$', 'index.views.index'),
     url(r'^search/', include('search.urls')),
     url(r'^staff', include('staff.urls')),
     url(r'^blog/', include('blog.urls')),
     url(r'^mail/', include('mail.urls')),
     url(r'^admission/', include('admission.urls')),
-    # url(r'^shad2017/register', 'admission.views.register'),
-    # url(r'^shad2017/activate/(?P<activation_key>\w+)/', 'admission.views.activate'),
-    # url(r'^shad2017/decline/(?P<activation_key>\w+)/', 'admission.views.decline'),
+    url(r'^shad2017/register', 'admission.views.register'),
+    url(r'^shad2017/activate/(?P<activation_key>\w+)/', 'admission.views.activate'),
+    url(r'^shad2017/decline/(?P<activation_key>\w+)/', 'admission.views.decline'),
     url(r'^lesson/', include('lessons.urls')),
     url(r'^api/', include('api.urls')),
 )
