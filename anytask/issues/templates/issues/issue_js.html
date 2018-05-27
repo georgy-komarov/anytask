@@ -25,6 +25,16 @@
     };
 
     $(document).ready(function () {
+        $("body").on("click", "#old_comments_button", function () {
+            var $top_alert = $("#top_alert");
+            if ($top_alert.hasClass("clicked")) {
+                $top_alert.show();
+                $top_alert.removeClass("clicked");
+            } else {
+                $top_alert.hide();
+                $top_alert.addClass("clicked");
+            }
+        });
 
         $(document).on('focusin', function(e) {
             if ($(e.target).closest(".mce-window").length) {
