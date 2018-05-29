@@ -18,8 +18,8 @@ server {
     server_name domain.com mydoamin.ru;
 
     location = /favicon.ico { access_log off; log_not_found off; }
-    location /static/ {
-        root /home/user/anytask/anytask;
+    location ~ ^/(static|media)/ {
+        root /home/user/anytask/anytask/;
     }
 
     location / {
