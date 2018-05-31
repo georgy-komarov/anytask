@@ -30,3 +30,4 @@ django-reversion==1.8
 dateutils
 flake8
 django_premailer==0.2.0
+django-mailgun
