@@ -31,7 +31,6 @@ def generate_invites(request):
 
     context = {
         'groups': groups,
-        'admin_email': settings.ADMIN_EMAIL,
         # 'courses'   : courses,
     }
 

@@ -179,7 +179,6 @@ def profile(request, username=None, year=None):
         'show_email': show_email,
         'user_above_user_to_show': user_above_user_to_show,
         'age': age,
-        'admin_email': settings.ADMIN_EMAIL,
     }
 
     return render_to_response('user_profile.html', context, context_instance=RequestContext(request))
@@ -433,7 +432,6 @@ def ya_oauth_forbidden(request, type_of_oauth):
     context = {
         'oauth_error_text_header': oauth_error_text_header,
         'oauth_error_text': oauth_error_text,
-        'admin_email': settings.ADMIN_EMAIL,
     }
 
     return render_to_response('oauth_error.html', context, context_instance=RequestContext(request))
@@ -444,7 +442,6 @@ def ya_oauth_changed(request):
     context = {
         'oauth_error_text_header': _(u"privjazat_profil_kontesta"),
         'oauth_error_text': _(u"pereprivjazat_tolko_svoj_profil"),
-        'admin_email': settings.ADMIN_EMAIL,
     }
 
     return render_to_response('oauth_error.html', context, context_instance=RequestContext(request))
