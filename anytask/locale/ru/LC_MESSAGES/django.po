@@ -2109,22 +2109,22 @@ msgstr ""
 msgid ""
 "You're receiving this e-mail because you requested a password reset for your "
 "user account at %(site_name)s."
-msgstr ""
+msgstr "Вы получили это письмо, потому что вы запросили сброс пароля на %(site_name)s."
 
 #: templates/registration/password_reset_email.html:28
 #: templates/registration/password_reset_email.txt:5
 msgid "Please go to the following page and choose a new password:"
-msgstr ""
+msgstr "Пожалуйста, перейдите на эту страницу и введите новый пароль:"
 
 #: templates/registration/password_reset_email.html:53
 #: templates/registration/password_reset_email.txt:8
 msgid "Your username, in case you've forgotten:"
-msgstr ""
+msgstr "Ваше имя пользователя (на случай, если вы его забыли):"
 
 #: templates/registration/password_reset_email_subject.txt:2
 #, python-format
 msgid "Password reset on %(site_name)s"
-msgstr ""
+msgstr "Сброс пароля на %(site_name)s"
 
 #: templates/registration/password_reset_form.html:5
 #: templates/registration/password_reset_form.html:14
