@@ -24,8 +24,16 @@ EMAIL_HOST_PASSWORD = 'mail_passwd_here'
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 
+# Or use mailgun
+# EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
+# MAILGUN_ACCESS_KEY = 'API-KEY'
+# MAILGUN_SERVER_NAME = 'DOMAIN.COM'
+
 # Set FROM field
 DEFAULT_FROM_EMAIL = 'example@mail.ru'
+
+# Set admin email for notifications (also shown in footer)
+ADMIN_EMAIL = 'exampleadmin@mail.ru'
 
 # Set admin for e-mail error notifications
 ADMINS = (('Admin Adminov', 'exampleadmin@mail.ru'), ('Name Lastname', 'exampleadmin2@mail.ru'))
