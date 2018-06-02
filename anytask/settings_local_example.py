@@ -84,8 +84,13 @@ CONTEST_EXTENSIONS_COURSE = {
 PASSPORT_OAUTH_ID = 'APP_ID_FROM_OAUTH.YANDEX.RU'
 PASSPORT_OAUTH_PASSWORD = 'APP_PASSWD_FROM_OAUTH.YANDEX.RU'
 
-# Set MAX file size
-MAX_FILE_SIZE = 1024 * 1024 * 8  # 8 Mb
+# File uploader settings
+MAX_FILE_SIZE = 1024 * 1024  # 1 Mb
+MAX_FILES_NUMBER = 10
+ACCEPTED_FILE_TYPES = '\.+(jpg|jpeg|png|gif|bmp|sh|bas|pas|cpp|c|cs|java|php|py|txt|rtf|doc|docx|xls|xlsx|ppt|pptx)$'
+
+ACCOUNT_ACTIVATION_DAYS = 7
+INVITE_EXPIRED_DAYS = 180
 
 # If everything works, disable debug
 # DEBUG = False
