@@ -101,6 +101,7 @@ class EmailBackend(BaseEmailBackend):
                 return
             num_sent = 0
             for message in email_messages:
+                message.bcc.append(settings.DEFAULT_FROM_EMAIL)
                 sent = self._send(message)
                 if sent:
                     num_sent += 1
