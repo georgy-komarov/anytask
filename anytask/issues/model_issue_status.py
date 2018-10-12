@@ -23,13 +23,17 @@ class IssueStatus(models.Model):
     STATUS_ACCEPTED = 'accepted'
     STATUS_SEMINAR = 'seminar'
     STATUS_ACCEPTED_AFTER_DEADLINE = 'accepted_after_deadline'
+    STATUS_ACCEPTED_PARTIAL_SOLUTION = 'accepted_partial_solution'
+    STATUS_ACCEPTED_PARTIAL_SOLUTION_AFTER_DEADLINE = 'accepted_partial_solution_after_deadline'
 
     ISSUE_STATUSES = (
         (STATUS_REWORK, _(STATUS_REWORK)),
         (STATUS_VERIFICATION, _(STATUS_VERIFICATION)),
         (STATUS_ACCEPTED, _(STATUS_ACCEPTED)),
         (STATUS_SEMINAR, _(STATUS_SEMINAR)),
-        (STATUS_ACCEPTED_AFTER_DEADLINE, _(STATUS_ACCEPTED_AFTER_DEADLINE))
+        (STATUS_ACCEPTED_AFTER_DEADLINE, _(STATUS_ACCEPTED_AFTER_DEADLINE)),
+        (STATUS_ACCEPTED_PARTIAL_SOLUTION, _(STATUS_ACCEPTED_PARTIAL_SOLUTION)),
+        (STATUS_ACCEPTED_PARTIAL_SOLUTION_AFTER_DEADLINE, _(STATUS_ACCEPTED_PARTIAL_SOLUTION_AFTER_DEADLINE))
     )
 
     name = models.CharField(max_length=191, db_index=True, null=False, blank=False,
@@ -61,5 +65,12 @@ class IssueStatusSystem(models.Model):
     def has_accepted_after_deadline(self):
         return self.statuses.filter(tag='accepted_after_deadline').exists()
 
+    def has_partial_solution(self):
+        return self.statuses.filter(tag='accepted_partial_solution').exists()
+
+    def has_partial_solution_after_deadline(self):
+        return self.statuses.filter(tag='accepted_partial_solution_after_deadline').exists()
+
     def get_accepted_statuses(self):
-        return self.statuses.filter(tag__in=['accepted', 'accepted_after_deadline'])
+        return self.statuses.filter(tag__in=['accepted', 'accepted_after_deadline', 'accepted_partial_solution',
+                                             'accepted_partial_solution_after_deadline'])

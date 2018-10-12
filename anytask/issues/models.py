@@ -86,7 +86,9 @@ class Issue(models.Model):
     status_field = models.ForeignKey(IssueStatus, db_index=True, null=False, blank=False, default=1)
 
     def is_status_accepted(self):
-        return self.status_field.tag in [IssueStatus.STATUS_ACCEPTED, IssueStatus.STATUS_ACCEPTED_AFTER_DEADLINE]
+        return self.status_field.tag in [IssueStatus.STATUS_ACCEPTED, IssueStatus.STATUS_ACCEPTED_AFTER_DEADLINE,
+                                         IssueStatus.STATUS_ACCEPTED_PARTIAL_SOLUTION,
+                                         IssueStatus.STATUS_ACCEPTED_PARTIAL_SOLUTION_AFTER_DEADLINE]
 
     def is_status_only_accepted(self):
         return self.status_field.tag == IssueStatus.STATUS_ACCEPTED
@@ -259,6 +261,12 @@ class Issue(models.Model):
     def set_status_accepted_after_deadline(self, author=None):
         self.set_status_by_tag(IssueStatus.STATUS_ACCEPTED_AFTER_DEADLINE, author)
 
+    def set_status_partial_solution(self, author=None):
+        self.set_status_by_tag(IssueStatus.STATUS_ACCEPTED_PARTIAL_SOLUTION, author)
+
+    def set_status_partial_solution_after_deadline(self, author=None):
+        self.set_status_by_tag(IssueStatus.STATUS_ACCEPTED_PARTIAL_SOLUTION_AFTER_DEADLINE, author)
+
     def set_status_need_info(self, author=None):
         self.set_status_by_tag(IssueStatus.STATUS_NEED_INFO, author)
 
@@ -335,7 +343,8 @@ class Issue(models.Model):
                                 else:
                                     value['comment'] += u"<p>{0}('{1}')</p>".format(_(u'oshibka_otpravki_v_kontest'),
                                                                                     contest_submission.send_error)
-                                    self.followers.add(User.objects.get(username='anytask.monitoring'))
+                                    # self.followers.add(User.objects.get(username='anytask.monitoring'))
+
                                 break
 
                     if self.task.rb_integrated \
@@ -350,7 +359,7 @@ class Issue(models.Model):
                                         format(review_request_id, settings.RB_API_URL)
                                 else:
                                     value['comment'] += u'<p>{0}</p>'.format(_(u'oshibka_otpravki_v_rb'))
-                                    self.followers.add(User.objects.get(username='anytask.monitoring'))
+                                    # self.followers.add(User.objects.get(username='anytask.monitoring'))
                                 break
 
                 if not value['files'] and not value['comment']:
@@ -588,9 +597,9 @@ class IssueFilter(django_filters.FilterSet):
         students_choices = [(teacher.id, teacher.get_full_name()) for teacher in course.get_students()]
         self.filters['students'].field.choices = tuple(students_choices)
 
-        tasks_all = Task.objects\
-            .filter(course=course)\
-            .exclude(type=Task.TYPE_MATERIAL)\
+        tasks_all = Task.objects \
+            .filter(course=course) \
+            .exclude(type=Task.TYPE_MATERIAL) \
             .distinct()
 
         seminars = tasks_all.filter(type=Task.TYPE_SEMINAR)

@@ -33,3 +33,4 @@ dateutils
 flake8
 django_premailer==0.2.0
 django-environ==0.4
+django-mailgun

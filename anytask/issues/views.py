@@ -103,7 +103,7 @@ def contest_rejudge(issue):
     else:
         event.value = u"<p>{1}('{0}').</p>".format(
             contest_submission.send_error, _(u'oshibka_otpravki_v_kontest'))
-        issue.followers.add(User.objects.get(username='anytask.monitoring'))
+        # issue.followers.add(User.objects.get(username='anytask.monitoring'))
 
     if issue.task.rb_integrated and issue.task.course.send_rb_and_contest_together:
         for ext in settings.RB_EXTENSIONS + [str(ext.name) for ext in issue.task.course.filename_extensions.all()]:
@@ -116,7 +116,7 @@ def contest_rejudge(issue):
                         format(review_request_id, settings.RB_API_URL)
                 else:
                     event.value += u'<p>{0}.</p>'.format(_(u'oshibka_otpravki_v_rb'))
-                    issue.followers.add(User.objects.get(username='anytask.monitoring'))
+                    # issue.followers.add(User.objects.get(username='anytask.monitoring'))
                 break
 
     event.save()

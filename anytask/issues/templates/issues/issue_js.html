@@ -5,6 +5,8 @@
 <script src="https://malsup.github.io/jquery.form.js"></script>
 <script src="{{ STATIC_URL }}tinymce/tinymce.min.js"></script>
 <script src="{{ STATIC_URL }}tinymce/jquery.tinymce.min.js"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({showMathMenu: false, tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-AMS_CHTML' async></script>
 <script src="{{ STATIC_URL }}prism.js"></script>
 
 <link href="{{ STATIC_URL }}prism.css" rel='stylesheet' />
@@ -25,6 +27,16 @@
     };
 
     $(document).ready(function () {
+        $("body").on("click", "#old_comments_button", function () {
+            var $top_alert = $("#top_alert");
+            if ($top_alert.hasClass("clicked")) {
+                $top_alert.show();
+                $top_alert.removeClass("clicked");
+            } else {
+                $top_alert.hide();
+                $top_alert.addClass("clicked");
+            }
+        });
 
         $(document).on('focusin', function(e) {
             if ($(e.target).closest(".mce-window").length) {

@@ -17,17 +17,16 @@
 
     {% index_message %}
 
-    {#    <div class="jumbotron">#}
-    {#        <h1 class="display-3">Anytask</h1>#}
-    {#        <p class="lead">&beta;-{% trans "версия" %}</p>#}
-    {#        <p>#}
-    {#            {% trans "Платформа для взаимодействия преподавателей и студентов в процессе обучения." %}#}
-    {##}
-    {#  {% trans "AnyTask &#151; сервис для учета выполнения студентами программы по учебным курсам." %}#}
-    {# <a href="/about">>></a> #}
-    {#        </p>#}
-    {#        <!-- <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p> -->#}
-    {#    </div>#}
+        <div class="jumbotron" style="padding: 2rem 2rem; background-color: #f5f8fa;">
+            <h1 class="display-3">Anytask</h1>
+            <p class="lead">&beta;-{% trans "версия" %}</p>
+            <p>
+                {% trans "Платформа для взаимодействия преподавателей и студентов в процессе обучения." %}
+
+      {% trans "AnyTask &#151; сервис для учета выполнения студентами программы по учебным курсам." %}
+            </p>
+            <!-- <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p> -->
+        </div>
 
     <div class="row">
         {% for school in schools %}

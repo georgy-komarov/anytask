@@ -1,0 +1,23 @@
+[Unit]
+Description=Anytask Django Development Server
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/home/user/anytask/anytask.pid
+WorkingDirectory=/home/user/anytask/anytask
+
+User=user
+Group=user
+
+OOMScoreAdjust=-300
+
+ExecStart=/home/user/anytask/.env/bin/python manage.py runserver 0.0.0.0:8019 -v 3 --traceback
+ExecStop=/bin/kill $MAINPID
+
+TimeoutSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target 

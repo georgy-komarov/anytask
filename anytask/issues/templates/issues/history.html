@@ -6,20 +6,6 @@
 
 {% load sanitize_html %}
 
-<script type="text/javascript">
-
-    $(document).on("click", "#old_comments_button", function() {
-        if($("#top_alert").hasClass("clicked")) {
-            $("#top_alert").show();
-            $("#top_alert").removeClass("clicked");
-        } else {
-            $("#top_alert").hide();
-            $("#top_alert").addClass("clicked");
-        }
-    });
-
-</script>
-
 <style>
     .mce-tinymce {
         margin-bottom: 1rem;

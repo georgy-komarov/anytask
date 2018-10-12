@@ -265,6 +265,7 @@ def course_page(request, course_id):
     context['visible_queue'] = course.user_can_see_queue(user),
     context['visible_attendance_log'] = course.user_can_see_attendance_log(user),
     context['user_is_teacher'] = course.user_is_teacher(user)
+    context['user_is_student'] = course.user_is_student(user)
     context['task_types'] = dict(Task().TASK_TYPE_CHOICES).items()
     context['show_hidden_tasks'] = request.session.get(
         str(request.user.id) + '_' + str(course.id) + '_show_hidden_tasks', False)
@@ -327,6 +328,7 @@ def seminar_page(request, course_id, task_id):
     context['visible_queue'] = course.user_can_see_queue(user),
     context['visible_attendance_log'] = course.user_can_see_attendance_log(user),
     context['user_is_teacher'] = course.user_is_teacher(user)
+    context['user_is_student'] = course.user_is_student(user)
     context['seminar'] = task
     context['task_types'] = dict(Task().TASK_TYPE_CHOICES).items()
     context['show_hidden_tasks'] = request.session.get(

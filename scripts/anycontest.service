@@ -1,0 +1,23 @@
+[Unit]
+Description=Anycontest check daemon
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/home/user/anytask/anycontest.pid
+WorkingDirectory=/home/user/anytask/anytask
+
+User=user
+Group=user
+
+OOMScoreAdjust=-100
+
+ExecStart=/home/user/anytask/.env/bin/python manage.py check_contest -v 3
+ExecStop=/bin/kill $MAINPID
+
+TimeoutSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target 

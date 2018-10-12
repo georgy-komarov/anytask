@@ -38,7 +38,7 @@ def get_lang_text(text, lang):
 
 class Task(models.Model):
     title = models.CharField(max_length=191, db_index=True, null=True, blank=True)
-    short_title = models.CharField(max_length=15, db_index=True, null=True, blank=True)
+    short_title = models.CharField(max_length=105, db_index=True, null=True, blank=True)
     course = models.ForeignKey(Course, db_index=True, null=False, blank=False)
     group = models.ForeignKey(Group, db_index=False, null=True, blank=True, default=None)
     groups = models.ManyToManyField(Group, null=False, blank=False, related_name='groups_set')
@@ -233,6 +233,10 @@ class Task(models.Model):
 
     def get_url_in_course(self):
         return reverse('courses.views.seminar_page', kwargs={'course_id': self.course_id, 'task_id': self.id})
+
+    @property
+    def score_max_seminar(self):
+        return sum(task.score_max for task in self.get_subtasks())
 
 
 class TaskLog(models.Model):
