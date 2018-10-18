@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  web:
+    env_file: docker.env
+    image: anytask:production
+    container_name: anytask
+    build:
+      context: ../../../
+      dockerfile: $PWD/Dockerfile
+    volumes:
+      - /var/run/anytask/static:/app/anytask/static
+      - /var/run/anytask/media:/app/anytask/static
+      - /var/run/anytask/uwsgi:/app/configs/uwsgi
+    restart: always
+    depends_on:
+    - database
+  database:
+    env_file: docker.env
+    image: postgres
+    restart: always

@@ -1,2 +1,6 @@
 anytask/media/
+.idea/
+.env/
 venv/
+.eggs
+sqlite3.db

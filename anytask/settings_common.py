@@ -1,9 +1,8 @@
 # Django settings for anytask project.
 # coding: utf-8
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
-
 import os
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -276,4 +275,8 @@ PREMAILER_OPTIONS = {
 
 API_LANGUAGE_CODE = 'en'
 
-JUPYTER_NBGRADER_API_URL = ''
+JUPYTER_NBGRADER_API_URL = 'http://localhost:8089'
+JUPYTER_NBGRADER_AUTH_TOKEN = 'your-nbgradersk-token'
+# JUPYTER_NBGRADER_DISABLED = True
+
+JUPYTERHUB_URL = 'http://localhost'

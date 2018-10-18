@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  web:
+    env_file: docker.env
+    image: anytask:develop
+    container_name: anytask
+    build:
+      context: ../../../
+      dockerfile: $PWD/Dockerfile
+    volumes:
+      - $PWD/media:/app/media
+      - $PWD/data:/app/data
+    ports:
+      - 8000:8000

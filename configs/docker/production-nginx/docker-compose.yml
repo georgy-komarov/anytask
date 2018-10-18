@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  web:
+    env_file: docker.env
+    image: anytask:production-nginx
+    container_name: anytask
+    build:
+      context: ../../../
+      dockerfile: $PWD/Dockerfile
+    volumes:
+      - static:/app/anytask/static
+      - media:/app/anytask/media
+      - socket:/app/docker/app.sock
+    restart: always
+    depends_on:
+    - database
+  nginx:
+    image: nginx:latest
+    volumes:
+      - static:/var/run/anytask/static
+      - media:/var/run/anytask/media
+      - socket:/var/run/app.sock
+    ports:
+    - 80:80
+    - 443:443
+    depends_on:
+    - web
+    restart: always
+  database:
+    env_file: docker.env
+    image: postgres
+    restart: always
+volumes:
+  static:
+  media:
+  socket:

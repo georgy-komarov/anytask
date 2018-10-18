@@ -59,8 +59,11 @@ target/
 # ...
 anytask/settings_local.py
 anytask/media/
-.env
+configs/docker/data
+configs/docker/media
+.idea/
+.env/
+venv/
 .eggs
 sqlite3.db
-venv
-.idea/
+docker.env
