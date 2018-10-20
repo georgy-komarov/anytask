@@ -1,6 +1,7 @@
 # Django settings for anytask project.
 # coding: utf-8
 
+from anytask.settings_common import *
 import os
 
 DEBUG = False

@@ -10,12 +10,14 @@ services:
       dockerfile: $PWD/Dockerfile
     volumes:
       - /var/run/anytask/static:/app/anytask/static
-      - /var/run/anytask/media:/app/anytask/static
-      - /var/run/anytask/uwsgi:/app/configs/uwsgi
+      - /var/run/anytask/media:/app/anytask/media
+    ports:
+      - 8000:8000
     restart: always
     depends_on:
     - database
   database:
     env_file: docker.env
     image: postgres
+    container_name: anytask-db
     restart: always
