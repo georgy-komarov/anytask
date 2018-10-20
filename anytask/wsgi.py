@@ -19,7 +19,7 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "anytask.settings_production")
 
-sys.path.append('/home/anytask/anytask/src/anytask')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.

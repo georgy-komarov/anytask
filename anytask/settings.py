@@ -47,9 +47,12 @@ LOGGING = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-MEDIA_ROOT = '/var/lib/anytask/media'
-UPLOAD_ROOT = '/var/lib/anytask/upload'
-STATIC_ROOT = '/var/lib/anytask/static'
+
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+UPLOAD_ROOT = os.path.join(PROJECT_PATH, 'upload')
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
 
 
 # local overrides (optional)
