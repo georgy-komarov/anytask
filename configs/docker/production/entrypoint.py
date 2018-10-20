@@ -6,7 +6,7 @@ import subprocess
 
 class StartHelper:
     def __init__(self):
-        self.STATIC_PATH = '/app/anytask/static'
+        self.STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
         self.STARTHELPER_FILE = '/app/.starthelper'  # This file is needed to check if app runs for the first time
 
     def is_first_run(self):
@@ -22,29 +22,41 @@ class StartHelper:
     def collect_static():
         print(subprocess.check_output('python /app/anytask/manage.py collectstatic --noinput', shell=True))
 
-    @staticmethod
-    def first_migrations():
-        commands = ['python manage.py syncdb --migrate --noinput --settings=settings_production',
-                    'python manage.py migrate years --settings=settings_production',
-                    'python manage.py migrate groups --settings=settings_production',
-                    'python manage.py migrate courses --settings=settings_production',
-                    'python manage.py migrate tasks --settings=settings_production',
-                    'python manage.py migrate issues --settings=settings_production',
-                    'python manage.py migrate mail --settings=settings_production',
-                    'python manage.py syncdb --migrate --noinput --settings=settings_production']
-        for cmd in commands:
-            print(subprocess.check_output(cmd, shell=True))
+    def first_migrations(self):
+        apps_order = ['years',
+                      'groups',
+                      'courses',
+                      'tasks',
+                      'issues',
+                      'mail']
+
+        self.migrate()
+        for app in apps_order:
+            print(subprocess.check_output('python manage.py {}'.format(app), shell=True))
+        self.migrate()
+
+    def migrate(self):
+        cmd = 'python manage.py syncdb --migrate --noinput'
+        print(subprocess.check_output(cmd, shell=True))
 
 
-sh = StartHelper()
-first_run = sh.is_first_run()
+PROJECT_PATH = '/app/anytask/'
 
-# Collect static if needed
-if not sh.has_static():
-    sh.collect_static()
+if __name__ == '__main__':
+    os.chdir(PROJECT_PATH)
 
-# Migration on first startup
-if first_run:
-    sh.first_migrations()
+    sh = StartHelper()
+    first_run = sh.is_first_run()
 
-print('Pre-start check completed!')
+    # Collect static if needed
+    if not sh.has_static():
+        sh.collect_static()
+
+    # Migration on first startup
+    if first_run:
+        sh.first_migrations()
+
+    if os.environ.get('AUTO_MIGRATE') == 'True':
+        sh.migrate()
+
+    print('Pre-start check completed!')
