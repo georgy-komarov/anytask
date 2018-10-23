@@ -3,15 +3,14 @@ FROM python:2
 WORKDIR /app
 
 COPY requirements.txt /app/requirements.txt
-COPY anytask /app/anytask
-COPY dependencies /app/dependencies
-COPY configs/docker/debug/settings.py /app/anytask/settings_local.py
 
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y gettext && \
-    pip install -r requirements.txt && \
-    python /app/anytask/manage.py compilemessages
+    pip install -r requirements.txt
 
-CMD python /app/anytask/manage.py syncdb --migrate --noinput && \
-    python /app/anytask/manage.py runserver 0.0.0.0:8000 -v 3 --traceback
+COPY configs/docker/debug/entrypoint.py /app/entrypoint.py
+
+ENTRYPOINT cd anytask && ls -la && \
+           echo 'execfile("/app/entrypoint.py")' | python manage.py shell && \
+           python manage.py runserver 0.0.0.0:8000 -v 3 --traceback

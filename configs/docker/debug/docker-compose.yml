@@ -9,7 +9,7 @@ services:
       context: ../../../
       dockerfile: $PWD/Dockerfile
     volumes:
-      - $PWD/media:/app/media
-      - $PWD/data:/app/data
+      - ../../../anytask:/app/anytask
+      - ../../../dependencies:/app/dependencies
     ports:
       - 8000:8000
