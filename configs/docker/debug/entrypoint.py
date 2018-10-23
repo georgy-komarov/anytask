@@ -17,7 +17,7 @@ os.chdir(BASE_DIR)
 
 # Check if container is running for the first time
 first_run = not os.path.exists(INIT_FILE)
-if not first_run:
+if first_run:
     open(INIT_FILE, 'w')
 
 # Migrate

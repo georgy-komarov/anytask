@@ -11,6 +11,6 @@ RUN apt-get update && \
 
 COPY configs/docker/debug/entrypoint.py /app/entrypoint.py
 
-ENTRYPOINT cd anytask && ls -la && \
+ENTRYPOINT cd anytask && \
            echo 'execfile("/app/entrypoint.py")' | python manage.py shell && \
            python manage.py runserver 0.0.0.0:8000 -v 3 --traceback
